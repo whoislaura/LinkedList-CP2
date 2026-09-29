@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class LinkedList<T> implements IList<T>{
 
     private Node<T> head, tail;
@@ -24,35 +26,56 @@ public class LinkedList<T> implements IList<T>{
 
     //1. Eliminar elementos repetidos
     public void eliminarRepetidos(){
-        Node<T>cursor = head;
-        for(int i=0; i<size; i++){
-            Node<T>cursor2 = cursor;
-            for(int j=i+1; j<size; j++){
-                if(cursor.getVal() == cursor2.getNext().getVal()) remove(j);
-                cursor2 = cursor2.getNext();
+        Node<T> cursor = head;
+        while (cursor != null) {
+            Node<T> previous = cursor;
+            Node<T> current = cursor.getNext();
+
+            while (current != null) {
+                if (Objects.equals(cursor.getVal(), current.getVal())) {
+                    previous.setNext(current.getNext());
+                    if (current == tail) {
+                        tail = previous;
+                    }
+                    size--;
+                    current = previous.getNext();
+                } else {
+                    previous = current;
+                    current = current.getNext();
+                }
             }
+
             cursor = cursor.getNext();
         }
     }
 
     //2. Rotar elementos una posicion a la derecha
     public void rotarDerecha(){
-        tail.setNext(head);
-        head = tail;
-        Node<T>cursor = head;
-        for(int i=0; i<size; i++){
-            if(i == size-1){
-                cursor.setNext(null);
-                break;
-            }
-            cursor = cursor.getNext();
+        if (size <= 1) {
+            return;
         }
+        Node<T> oldTail = tail;
+        Node<T> newTail = head;
+        while (newTail.getNext() != oldTail) {
+            newTail = newTail.getNext();
+        }
+        oldTail.setNext(head);
+        head = oldTail;
+        tail = newTail;
+        tail.setNext(null);
     }
     //3. Concatenar 2 listas
     public void concat(LinkedList<T> l2){
-        tail.setNext(l2.head);
-        tail = l2.tail;
-        size +=l2.size();
+        if (l2 == null) {
+            throw new IllegalArgumentException("La lista no puede estar vacía");
+        }
+
+        int elementsToAdd = l2.size;
+        Node<T> cursor = l2.head;
+        for (int i = 0; i < elementsToAdd; i++) {
+            add(cursor.getVal());
+            cursor = cursor.getNext();
+        }
     }
 
     @Override
