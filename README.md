@@ -1,10 +1,10 @@
 # LinkedList-CP2
 
-Práctica de la asignatura Estructura de Datos para la implementación y manipulación de una lista simplemente enlazada en Java.
+Clase Práctica de la asignatura Estructura de Datos para la implementación y manipulación de una lista simplemente enlazada en Java.
 
 ## Descripción
 
-El proyecto implementa una lista simplemente enlazada genérica utilizando nodos enlazados. Su objetivo es aplicar los conceptos fundamentales de las estructuras de datos dinámicas y resolver las operaciones solicitadas en la práctica:
+El proyecto implementa una lista simplemente enlazada genérica utilizando nodos enlazados. Su objetivo es aplicar los conceptos fundamentales de las estructuras de datos dinámicas y resolver las operaciones solicitadas en la clase práctica:
 
 1. Eliminar los elementos repetidos de una lista.
 2. Rotar los elementos una posición hacia la derecha.
